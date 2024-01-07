@@ -1,6 +1,7 @@
 'use client'
 
 import { CodeBlock } from '@/components/CodeBlock';
+import axios from 'axios';
 import Head from 'next/head';
 import { useState } from 'react';
 
@@ -32,11 +33,8 @@ export default function Home() {
 
     const response = await (() => {
       try {
-        return fetch('https://gd-format-backend-black-breeze-3291.fly.dev/v1/format/gd-script', {
-          method: 'POST',
+        return axios.post('https://gd-format-backend-black-breeze-3291.fly.dev/v1/format/gd-script', inputCode, {
           signal: controller.signal,
-          body: inputCode,
-          mode: 'no-cors',
           headers: {
             'Accept': 'text/plain',
             'Content-Type': 'text/plain'
@@ -48,40 +46,17 @@ export default function Home() {
      }
     })()
 
-    if (!response) {
+    if (!response || response.status !== 200 || !response.data) {
       console.debug('HERE');
       setLoading(false);
       alert('Something went wrong.');
       return;
     }
 
-    const data = response.body;
-
-    if (!data) {
-      console.debug('here2')
-      setLoading(false);
-      alert('Something went wrong.');
-      return;
-    }
-
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
-    let code = '';
-
-    while (!done) {
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-
-      code += chunkValue;
-
-      setOutputCode((prevCode) => prevCode + chunkValue);
-    }
-
+    setOutputCode(response.data);
     setLoading(false);
     setHasFormatted(true);
-    copyToClipboard(code);
+    copyToClipboard(response.data);
   };
 
   const copyToClipboard = async (text: string) => {
