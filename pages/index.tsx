@@ -79,7 +79,7 @@ export default function Home() {
           <div className="text-4xl font-bold">GDScript formatter</div>
         </div>
 
-        <div className="mt-2 flex items-center space-x-2">
+        <div className="mt-4 flex items-center space-x-2">
           <button
             className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
             onClick={() => handleFormat()}
@@ -97,7 +97,7 @@ export default function Home() {
             : 'Enter some code and click "Format"'}
         </div>
 
-        <div className="mt-6 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
+        <div className="mt-4 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
           <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
             <div className="text-center text-xl font-bold">Input</div>
 
@@ -115,6 +115,23 @@ export default function Home() {
               <CodeBlock code={outputCode} />
           </div>
         </div>
+
+        {/* <div className="mt-6 flex items-center space-x-2">
+          <button
+            className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
+            onClick={() => handleFormat()}
+            disabled={loading}
+          >
+            Linter
+          </button>
+          <button
+            className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
+            onClick={() => handleFormat()}
+            disabled={loading}
+          >
+            Formatter
+          </button>
+        </div> */}
       </div>
     </>
   );

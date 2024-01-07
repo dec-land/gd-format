@@ -1,7 +1,6 @@
-import { StreamLanguage } from '@codemirror/language';
-import { python } from '@codemirror/legacy-modes/mode/python';
-import { tokyoNight } from '@uiw/codemirror-theme-tokyo-night';
+import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import CodeMirror from '@uiw/react-codemirror';
+import { gdscript } from "@gdquest/codemirror-gdscript";
 import { FC, useEffect, useState } from 'react';
 
 interface Props {
@@ -40,9 +39,10 @@ export const CodeBlock: FC<Props> = ({
       <CodeMirror
         editable={editable}
         value={code}
+
         height="500px"
-        extensions={[StreamLanguage.define(python)]}
-        theme={tokyoNight}
+        extensions={[gdscript()]}
+        theme={vscodeDark}
         onChange={(value) => onChange(value)}
       />
     </div>
