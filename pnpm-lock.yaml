@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@codemirror/language':
+    specifier: ^6.10.0
+    version: 6.10.0
   '@codemirror/legacy-modes':
     specifier: github:codemirror/legacy-modes
     version: github.com/codemirror/legacy-modes/48c56cf79a883068880ba24efc053c1413bb8df0
