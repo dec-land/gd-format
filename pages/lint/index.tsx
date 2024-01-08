@@ -1,7 +1,8 @@
 "use client";
 
 import { CodeBlock } from "@/components/CodeBlock";
-import axios from "axios";
+import { BackendError } from "@/types/BackendError";
+import axios, { isAxiosError } from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -41,29 +42,34 @@ export default function Home() {
 
     const controller = new AbortController();
 
-    const response = await (async () => {
-      try {
-        return await axios.post<Response>(
-          `${process.env.NEXT_PUBLIC_API_ENDPOINT}/v1/lint/gd-script`,
-          inputCode,
-          {
-            signal: controller.signal,
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "text/plain",
-            },
-          }
-        );
-      } catch (error) {
+    const response = await axios
+      .post(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/v1/lint/gd-script`,
+        inputCode,
+        {
+          signal: controller.signal,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "text/plain",
+          },
+        }
+      )
+      .catch((error) => {
         setLoading(false);
+        if (isAxiosError<BackendError>(error) && error.response) {
+          if (error.response.status === 422) {
+            toast.error(
+              "Invalid GDScript provided, please change it and try again."
+            );
+            return;
+          }
+        }
         toast.error("Something went wrong, please try again.");
         return;
-      }
-    })();
+      });
 
     if (!response?.data) {
       setLoading(false);
-      toast.error("Something went wrong, please try again.");
       return;
     }
 
