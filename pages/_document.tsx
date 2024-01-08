@@ -25,6 +25,7 @@ export default function Document() {
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9568267309357674"
+        strategy="lazyOnload"
         crossOrigin="anonymous"
       />
       <body>
