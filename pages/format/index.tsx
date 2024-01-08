@@ -89,7 +89,7 @@ export default function Home() {
       <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
         <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
           <div className="text-4xl font-bold text-center">
-            GDScript Lormatter
+            GDScript Formatter
           </div>
         </div>
 
