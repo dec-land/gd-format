@@ -3,10 +3,15 @@
 import { CodeBlock } from "@/components/CodeBlock";
 import { BackendError } from "@/types/BackendError";
 import axios, { isAxiosError } from "axios";
-import Head from "next/head";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GDScript Formatter",
+  description: "Prettify your GDScript.",
+};
 
 const MAX_CODE_LENGTH = 1000000;
 
@@ -79,78 +84,63 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Head>
-        <title>GDScript Formatter</title>
-        <meta name="description" content="Prettify your GDScript code" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
-        <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
-          <div className="text-4xl font-bold text-center">
-            GDScript Formatter
-          </div>
+    <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
+      <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
+        <div className="text-4xl font-bold text-center">GDScript Formatter</div>
+      </div>
+      <div className="mt-4 flex items-center space-x-2">
+        <button
+          className="w-[140px] rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700 disabled:bg-gray-700"
+          onClick={() => handleFormat()}
+          disabled={loading || !inputCode || hasFormatted}
+        >
+          {loading ? "Formatting..." : "Format"}
+        </button>
+      </div>
+      <div className="mt-4 text-center text-xs">
+        {loading
+          ? "Formatting..."
+          : hasFormatted
+          ? "Output copied to clipboard!"
+          : 'Enter some code and click "Format"'}
+      </div>
+      <div className="mt-4 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
+        <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
+          <div className="text-center text-xl font-bold">Input</div>
+
+          <CodeBlock
+            code={inputCode}
+            editable={!loading}
+            onChange={(value) => {
+              setInputCode(value);
+              setHasFormatted(false);
+            }}
+          />
         </div>
-
-        <div className="mt-4 flex items-center space-x-2">
-          <button
-            className="w-[140px] rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700 disabled:bg-gray-700"
-            onClick={() => handleFormat()}
-            disabled={loading || !inputCode || hasFormatted}
-          >
-            {loading ? "Formatting..." : "Format"}
-          </button>
-        </div>
-
-        <div className="mt-4 text-center text-xs">
-          {loading
-            ? "Formatting..."
-            : hasFormatted
-            ? "Output copied to clipboard!"
-            : 'Enter some code and click "Format"'}
-        </div>
-
-        <div className="mt-4 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
-          <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
-            <div className="text-center text-xl font-bold">Input</div>
-
-            <CodeBlock
-              code={inputCode}
-              editable={!loading}
-              onChange={(value) => {
-                setInputCode(value);
-                setHasFormatted(false);
-              }}
-            />
-          </div>
-          <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
-            <div className="text-center text-xl font-bold">Output</div>
-            <CodeBlock code={outputCode} />
-          </div>
-        </div>
-
-        <div className="mt-10 flex flex-col items-center justify-center">
-          <div className="text-2xl font-bold text-center">Other tools</div>
-        </div>
-
-        <div className="mt-6 flex items-center space-x-10">
-          <button
-            className="w-[140px] cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold hover:bg-blue-600 active:bg-blue-700"
-            onClick={() => router.push("/lint")}
-            disabled={loading}
-          >
-            Linter
-          </button>
-          <button
-            className="w-[140px] cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold hover:bg-blue-600 active:bg-blue-700"
-            onClick={() => router.push("/diff")}
-            disabled={loading}
-          >
-            Diff Checker
-          </button>
+        <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
+          <div className="text-center text-xl font-bold">Output</div>
+          <CodeBlock code={outputCode} />
         </div>
       </div>
-    </>
+      <div className="mt-10 flex flex-col items-center justify-center">
+        <div className="text-2xl font-bold text-center">Other tools</div>
+      </div>
+      <div className="mt-6 flex items-center space-x-10">
+        <button
+          className="w-[140px] cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold hover:bg-blue-600 active:bg-blue-700"
+          onClick={() => router.push("/lint")}
+          disabled={loading}
+        >
+          Linter
+        </button>
+        <button
+          className="w-[140px] cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold hover:bg-blue-600 active:bg-blue-700"
+          onClick={() => router.push("/diff")}
+          disabled={loading}
+        >
+          Diff Checker
+        </button>
+      </div>
+    </div>
   );
 }
