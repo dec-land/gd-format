@@ -3,6 +3,7 @@
 import { CodeBlock } from "@/components/CodeBlock";
 import axios from "axios";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -17,8 +18,9 @@ export default function Home() {
   const router = useRouter();
 
   type Response = {
-    numberOfProblemsparsed: number;
+    numberOfProblems: number;
     problems: string[];
+    hasIssues: boolean;
   };
 
   const handleLinting = async () => {
@@ -65,7 +67,11 @@ export default function Home() {
       return;
     }
 
-    toast.success("Code successfully linted! :)");
+    if (response.data.hasIssues) {
+      toast.success(`Issues found: ${response.data.numberOfProblems}`);
+    } else {
+      toast.success(`No issues found`);
+    }
 
     setOutput(response.data);
     setLoading(false);
@@ -96,11 +102,7 @@ export default function Home() {
         </div>
 
         <div className="mt-4 text-center text-xs">
-          {loading
-            ? "Linting..."
-            : hasLinted
-            ? "Output copied to clipboard!"
-            : 'Enter some code and click "Lint"'}
+          {loading ? "Linting..." : 'Enter some code and click "Lint"'}
         </div>
 
         <div className="mt-4 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
@@ -117,7 +119,22 @@ export default function Home() {
             />
           </div>
           <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
-            <div className="text-center text-xl font-bold">Output</div>
+            <div className="flex flex-row h-full w-full justify-center gap-4">
+              <div className="text-center text-xl font-bold">Output</div>
+              {output?.hasIssues && (
+                <div className="flex items-center justify-center gap-2">
+                  <Image
+                    src="/warning.png" // Replace with your icon path
+                    alt="Warning"
+                    width={25}
+                    height={25}
+                  />
+                  <span className="text-sm font-medium text-red-500">
+                    {output.numberOfProblems} problems
+                  </span>
+                </div>
+              )}
+            </div>
             <CodeBlock
               code={output?.problems.join("\n") ?? ""}
               extensions={[]}
