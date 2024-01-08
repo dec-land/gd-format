@@ -1,2 +1,4 @@
-import Format from '../pages/format'
-export default Format
+"use client";
+
+import Format from "./format";
+export default Format;

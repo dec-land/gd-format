@@ -4,6 +4,7 @@ import { CodeBlock } from "@/components/CodeBlock";
 import { BackendError } from "@/types/BackendError";
 import axios, { isAxiosError } from "axios";
 import Head from "next/head";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -14,6 +15,7 @@ export default function Home() {
   const [outputCode, setOutputCode] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [hasFormatted, setHasFormatted] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleFormat = async () => {
     if (!inputCode) {
@@ -87,7 +89,7 @@ export default function Home() {
       <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
         <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
           <div className="text-4xl font-bold text-center">
-            GDScript formatter
+            GDScript Lormatter
           </div>
         </div>
 
@@ -128,22 +130,26 @@ export default function Home() {
           </div>
         </div>
 
-        {/* <div className="mt-6 flex items-center space-x-2">
+        <div className="mt-10 flex flex-col items-center justify-center">
+          <div className="text-2xl font-bold text-center">Other tools</div>
+        </div>
+
+        <div className="mt-6 flex items-center space-x-10">
           <button
-            className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
-            onClick={() => handleFormat()}
+            className="w-[140px] cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold hover:bg-blue-600 active:bg-blue-700"
+            onClick={() => router.push("/lint")}
             disabled={loading}
           >
             Linter
           </button>
           <button
-            className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
-            onClick={() => handleFormat()}
+            className="w-[140px] cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold hover:bg-blue-600 active:bg-blue-700"
+            onClick={() => router.push("/diff")}
             disabled={loading}
           >
-            Formatter
+            Diff Checker
           </button>
-        </div> */}
+        </div>
       </div>
     </>
   );
