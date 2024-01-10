@@ -106,22 +106,6 @@ export default function Home() {
           : 'Enter some code and click "Format"'}
       </div>
 
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9568267309357674"
-        crossOrigin="anonymous"
-      >
-      </script>
-
-      <ins
-        className="adsbygoogle"
-        style={{display: 'block'}}
-        data-ad-client="ca-pub-9568267309357674"
-        data-ad-slot="4126867094"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
-
       <div className="mt-4 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
         <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
           <div className="text-center text-xl font-bold">Input</div>
@@ -157,13 +141,13 @@ export default function Home() {
         >
           Linter
         </button>
-        <button
+        {/* <button
           className="w-[140px] cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold hover:bg-blue-600 active:bg-blue-700"
           onClick={() => router.push("/diff")}
           disabled={loading}
         >
           Diff Checker
-        </button>
+        </button> */}
       </div>
     </div>
   );
