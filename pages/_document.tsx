@@ -1,8 +1,6 @@
 import { Metadata } from "next";
 import { Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 export const metadata: Metadata = {
@@ -35,8 +33,6 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <SpeedInsights/>
-        <Analytics/>
       </body>
     </Html>
   );
