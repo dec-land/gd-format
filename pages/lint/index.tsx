@@ -2,6 +2,7 @@
 
 import { CodeBlock } from "@/components/CodeBlock";
 import { BackendError } from "@/types/BackendError";
+import { Adsense } from "@ctrl/react-adsense";
 import axios, { isAxiosError } from "axios";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -142,6 +143,13 @@ export default function Home() {
           <CodeBlock code={output?.problems.join("\n") ?? ""} extensions={[]} />
         </div>
       </div>
+      
+      <Adsense
+        client="ca-pub-9568267309357674"
+        slot="4126867094"
+        format="auto"
+        responsive="true"
+      />
 
       <div className="mt-10 flex flex-col items-center justify-center">
         <div className="text-2xl font-bold text-center">Other tools</div>

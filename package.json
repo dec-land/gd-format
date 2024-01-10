@@ -11,6 +11,7 @@
   "dependencies": {
     "@codemirror/language": "^6.10.0",
     "@codemirror/state": "^6.4.0",
+    "@ctrl/react-adsense": "^1.7.0",
     "@gdquest/codemirror-gdscript": "^0.1.2",
     "@uiw/codemirror-theme-vscode": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",

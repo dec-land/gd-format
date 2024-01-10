@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Metadata } from "next";
+import { Adsense } from "@ctrl/react-adsense";
 
 export const metadata: Metadata = {
   title: "GDScript Formatter",
@@ -122,6 +123,12 @@ export default function Home() {
           <CodeBlock code={outputCode} />
         </div>
       </div>
+      <Adsense
+        client="ca-pub-9568267309357674"
+        slot="4126867094"
+        format="auto"
+        responsive="true"
+      />
       <div className="mt-10 flex flex-col items-center justify-center">
         <div className="text-2xl font-bold text-center">Other tools</div>
       </div>

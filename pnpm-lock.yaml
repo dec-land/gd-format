@@ -7,6 +7,9 @@ dependencies:
   '@codemirror/state':
     specifier: ^6.4.0
     version: 6.4.0
+  '@ctrl/react-adsense':
+    specifier: ^1.7.0
+    version: 1.7.0
   '@gdquest/codemirror-gdscript':
     specifier: ^0.1.2
     version: 0.1.2(@codemirror/autocomplete@6.11.1)(@codemirror/commands@6.3.3)(@codemirror/language@6.10.0)(@codemirror/state@6.4.0)(@codemirror/view@6.23.0)(@lezer/highlight@1.2.0)(@lezer/lr@1.3.14)
@@ -170,6 +173,12 @@ packages:
       '@codemirror/state': 6.4.0
       style-mod: 4.1.0
       w3c-keyname: 2.2.8
+    dev: false
+
+  /@ctrl/react-adsense@1.7.0:
+    resolution: {integrity: sha512-TrDGbAo8KRPHnX/Jtv9CkMV90vK7M/sz8KNECTQgcsHO4e5GyNZL3jqCY4WA0MCwfT48NH34qzyV9e2SWsceLw==}
+    dependencies:
+      tslib: 2.6.2
     dev: false
 
   /@eslint-community/eslint-utils@4.4.0(eslint@8.56.0):
