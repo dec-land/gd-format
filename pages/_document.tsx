@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
+import { useEffect } from "react";
 
 
 export const metadata: Metadata = {
@@ -20,6 +21,16 @@ export const metadata: Metadata = {
 };
 
 export default function Document() {
+
+  useEffect(() => {
+    var ads = document.getElementsByClassName('adsbygoogle').length;
+    for (var i = 0; i < ads; i++) {
+      try {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      } catch (e) {}
+    }
+  }, []);
+
   return (
     <Html lang="en">
       <Head>
