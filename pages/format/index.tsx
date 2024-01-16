@@ -111,6 +111,7 @@ export default function Home() {
 
           <CodeBlock
             code={inputCode}
+            isLoading={loading}
             editable={!loading}
             onChange={(value) => {
               setInputCode(value);
@@ -124,6 +125,7 @@ export default function Home() {
           <CodeBlock
             code={outputCode}
             editable={false}
+            isLoading={loading}
             showClearAndOpenFromFile={false}
           />
         </div>

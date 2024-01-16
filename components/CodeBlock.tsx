@@ -19,6 +19,7 @@ interface Props {
   showClearAndOpenFromFile?: boolean;
   extensions?: Extension[];
   showDownloadAndClear?: boolean;
+  isLoading?: boolean;
   onChange?: (value: string) => void;
 }
 
@@ -26,6 +27,7 @@ export const CodeBlock: FC<Props> = ({
   code,
   extensions,
   editable = true,
+  isLoading,
   showClearAndOpenFromFile = true,
   showDownloadAndClear = true,
   onChange = () => {},
@@ -72,6 +74,7 @@ export const CodeBlock: FC<Props> = ({
     }
     const blob = new Blob([code]);
     saveAs(blob, "GDScriptFormatter.gd");
+    toast.success("File successfully downloaded");
   };
 
   return (
@@ -81,28 +84,28 @@ export const CodeBlock: FC<Props> = ({
       <div className="flex items-center bg-primary justify-end h-8">
         {showClearAndOpenFromFile && (
           <div className="tooltip mr-4" data-tip="Open from file">
-            <button onClick={open} disabled={!editable}>
+            <button onClick={open} disabled={isLoading}>
               <FontAwesomeIcon icon={faFolderOpen} size="lg" />
             </button>
           </div>
         )}
         {showDownloadAndClear && (
           <div className="tooltip mr-4" data-tip="Download">
-            <button onClick={handleDownload} disabled={!editable}>
+            <button onClick={handleDownload} disabled={isLoading}>
               <FontAwesomeIcon icon={faSave} size="lg" />
             </button>
           </div>
         )}
         {showDownloadAndClear && (
           <div className="tooltip mr-4" data-tip="Copy to clipboard">
-            <button onClick={handleCopy} disabled={!editable}>
+            <button onClick={handleCopy} disabled={isLoading}>
               <FontAwesomeIcon icon={faCopy} size="lg" />
             </button>
           </div>
         )}
         {showClearAndOpenFromFile && (
           <div className="tooltip mr-4" data-tip="Clear">
-            <button onClick={handleClear} disabled={!editable}>
+            <button onClick={handleClear} disabled={isLoading}>
               <FontAwesomeIcon icon={faTrashCan} size="lg" />
             </button>
           </div>

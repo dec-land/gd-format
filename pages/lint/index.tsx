@@ -113,6 +113,7 @@ export default function Home() {
 
           <CodeBlock
             code={inputCode}
+            isLoading={loading}
             editable={!loading}
             onChange={(value) => {
               setInputCode(value);
@@ -140,6 +141,7 @@ export default function Home() {
           <CodeBlock
             editable={false}
             showDownloadAndClear={false}
+            isLoading={loading}
             showClearAndOpenFromFile={false}
             code={output?.problems.join("\n") ?? ""}
             extensions={[]}
