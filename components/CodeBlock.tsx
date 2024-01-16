@@ -1,47 +1,122 @@
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import CodeMirror, { Extension } from "@uiw/react-codemirror";
 import { gdscript } from "@gdquest/codemirror-gdscript";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect } from "react";
+import {
+  faSave,
+  faFolderOpen,
+  faTrashCan,
+  faCopy,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
+import { saveAs } from "file-saver";
+import { useDropzone } from "react-dropzone";
 
 interface Props {
   code: string;
   editable?: boolean;
+  showClearAndOpenFromFile?: boolean;
   extensions?: Extension[];
+  showDownloadAndClear?: boolean;
+  isLoading?: boolean;
   onChange?: (value: string) => void;
 }
 
 export const CodeBlock: FC<Props> = ({
   code,
-  editable = false,
   extensions,
+  editable = true,
+  isLoading,
+  showClearAndOpenFromFile = true,
+  showDownloadAndClear = true,
   onChange = () => {},
 }) => {
-  const [copyText, setCopyText] = useState<string>("Copy");
+  const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
+    // Disable click and keydown behavior
+    noClick: true,
+    noKeyboard: true,
+    multiple: false,
+    onDrop: (acceptedFiles) => {
+      if (!acceptedFiles.length && acceptedFiles[0]) return;
+      const file = acceptedFiles[0];
+      const fileReader = new FileReader();
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setCopyText("Copy");
-    }, 2000);
+      fileReader.onload = () => {
+        const content = fileReader.result;
+        if (!content) return;
+        onChange(content.toString());
+      };
 
-    return () => clearTimeout(timeout);
-  }, [copyText]);
+      fileReader.readAsText(file);
+    },
+    accept: {
+      "text/plain": [".gd"],
+    },
+  });
+
+  const handleCopy = async () => {
+    if (!code.length) {
+      toast.error("Nothing to copy");
+    }
+    await navigator.clipboard.writeText(code);
+    toast.success("Code successfully copied to clipboard");
+  };
+
+  const handleClear = async () => {
+    onChange("");
+  };
+
+  const handleDownload = async () => {
+    if (!code.length) {
+      toast.error("Nothing to download");
+      return;
+    }
+    const blob = new Blob([code]);
+    saveAs(blob, "GDScriptFormatter.gd");
+    toast.success("File successfully downloaded");
+  };
 
   return (
-    <div className="relative">
-      <button
-        className="absolute right-0 top-0 z-10 rounded bg-[#1A1B26] p-1 text-xs text-white hover:bg-[#2D2E3A] active:bg-[#2D2E3A]"
-        onClick={() => {
-          navigator.clipboard.writeText(code);
-          setCopyText("Copied!");
-        }}
-      >
-        {copyText}
-      </button>
+    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+
+      <div className="flex items-center bg-primary justify-end h-8">
+        {showClearAndOpenFromFile && (
+          <div className="tooltip mr-4" data-tip="Open from file">
+            <button onClick={open} disabled={isLoading}>
+              <FontAwesomeIcon icon={faFolderOpen} size="lg" />
+            </button>
+          </div>
+        )}
+        {showDownloadAndClear && (
+          <div className="tooltip mr-4" data-tip="Download">
+            <button onClick={handleDownload} disabled={isLoading}>
+              <FontAwesomeIcon icon={faSave} size="lg" />
+            </button>
+          </div>
+        )}
+        {showDownloadAndClear && (
+          <div className="tooltip mr-4" data-tip="Copy to clipboard">
+            <button onClick={handleCopy} disabled={isLoading}>
+              <FontAwesomeIcon icon={faCopy} size="lg" />
+            </button>
+          </div>
+        )}
+        {showClearAndOpenFromFile && (
+          <div className="tooltip mr-4" data-tip="Clear">
+            <button onClick={handleClear} disabled={isLoading}>
+              <FontAwesomeIcon icon={faTrashCan} size="lg" />
+            </button>
+          </div>
+        )}
+      </div>
 
       <CodeMirror
         editable={editable}
         value={code}
         height="500px"
+        readOnly={!editable}
         extensions={extensions ?? [gdscript()]}
         theme={vscodeDark}
         onChange={(value) => onChange(value)}

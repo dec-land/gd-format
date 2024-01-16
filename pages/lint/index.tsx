@@ -2,11 +2,9 @@
 
 import { CodeBlock } from "@/components/CodeBlock";
 import { BackendError } from "@/types/BackendError";
-import { Adsense } from "@ctrl/react-adsense";
 import axios, { isAxiosError } from "axios";
 import { Metadata } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -22,7 +20,6 @@ export default function Home() {
   const [output, setOutput] = useState<Response | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [hasLinted, setHasLinted] = useState<boolean>(false);
-  const router = useRouter();
 
   type Response = {
     numberOfProblems: number;
@@ -32,13 +29,13 @@ export default function Home() {
 
   const handleLinting = async () => {
     if (!inputCode) {
-      alert("Please enter some code.");
+      toast.info("Please enter some GDScript to lint.");
       return;
     }
 
     if (inputCode.length > MAX_CODE_LENGTH) {
-      alert(
-        `Please enter code less than ${MAX_CODE_LENGTH} characters. You are currently at ${inputCode.length} characters.`
+      toast.error(
+        `Please enter GDScript less than ${MAX_CODE_LENGTH} characters. You are currently at ${inputCode.length} characters.`
       );
       return;
     }
@@ -91,23 +88,21 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
-      <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
-        <div className="text-4xl font-bold text-center">GDScript Linter</div>
-      </div>
-
+    <div className="flex pt-20 h-full min-h-screen flex-col items-center px-4 sm:px-10">
       <div className="mt-4 flex items-center space-x-2">
         <button
-          className="w-[140px] rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700 disabled:bg-gray-700"
+          className="w-[140px] btn btn-primary font-bold"
           onClick={() => handleLinting()}
-          disabled={loading || !inputCode || hasLinted}
+          // disabled={loading || !inputCode || hasLinted}
         >
-          {loading ? "Linting..." : "Lint"}
+          {loading ? <span className="loading loading-spinner"></span> : "Lint"}
         </button>
       </div>
 
       <div className="mt-4 text-center text-xs">
-        {loading ? "Linting..." : 'Enter some code and click "Lint"'}
+        {loading
+          ? "Linting..."
+          : 'Please enter some GDScript, then click "Lint"'}
       </div>
 
       <div className="mt-4 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
@@ -116,6 +111,7 @@ export default function Home() {
 
           <CodeBlock
             code={inputCode}
+            isLoading={loading}
             editable={!loading}
             onChange={(value) => {
               setInputCode(value);
@@ -140,36 +136,15 @@ export default function Home() {
               </div>
             )}
           </div>
-          <CodeBlock code={output?.problems.join("\n") ?? ""} extensions={[]} />
+          <CodeBlock
+            editable={false}
+            showDownloadAndClear={false}
+            isLoading={loading}
+            showClearAndOpenFromFile={false}
+            code={output?.problems.join("\n") ?? ""}
+            extensions={[]}
+          />
         </div>
-      </div>
-      
-      <Adsense
-        client="ca-pub-9568267309357674"
-        slot="4126867094"
-        format="auto"
-        responsive="true"
-      />
-
-      <div className="mt-10 flex flex-col items-center justify-center">
-        <div className="text-2xl font-bold text-center">Other tools</div>
-      </div>
-
-      <div className="mt-6 flex items-center space-x-10">
-        <button
-          className="w-[140px] cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold hover:bg-blue-600 active:bg-blue-700"
-          onClick={() => router.push("/format")}
-          disabled={loading}
-        >
-          Formatter
-        </button>
-        {/* <button
-          className="w-[140px] cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold hover:bg-blue-600 active:bg-blue-700"
-          onClick={() => router.push("/diff")}
-          disabled={loading}
-        >
-          Diff Checker
-        </button> */}
       </div>
     </div>
   );
