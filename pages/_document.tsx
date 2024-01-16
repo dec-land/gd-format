@@ -3,16 +3,18 @@ import { Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
 import { useEffect } from "react";
 
-
 export const metadata: Metadata = {
   title: "GDScript Formatter",
   description: "Prettify your GDScript code and more",
-  icons: "/favicon.svg",
+  icons: "/favicon.ico",
+  robots: "index, follow",
 
-  keywords: "gdscript, godot, formatter, tools, linter",
+  keywords:
+    "gdscript formatter, gdscriptformatter, gdscript linter, godot formatter",
   authors: { name: "Declan Fitzpatrick" },
 
   openGraph: {
+    siteName: "GDScript Formatter",
     title: "GDScript Formatter",
     description: "Prettify your GDScript code and more",
     type: "website",
@@ -21,12 +23,13 @@ export const metadata: Metadata = {
 };
 
 export default function Document() {
-
   useEffect(() => {
-    var ads = document.getElementsByClassName('adsbygoogle').length;
+    var ads = document.getElementsByClassName("adsbygoogle").length;
     for (var i = 0; i < ads; i++) {
       try {
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push(
+          {}
+        );
       } catch (e) {}
     }
   }, []);
