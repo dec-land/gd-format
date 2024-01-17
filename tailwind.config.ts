@@ -13,15 +13,15 @@ const config: Config = {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
           secondary: "#c026d3",
-          primary: "#793ef9",
+          primary: "#478cbf",
         },
         dark: {
           ...require("daisyui/src/theming/themes")["dark"],
           secondary: "#c026d3",
-          primary: "#793ef9",
+          primary: "#478cbf",
           "secondary-content": "#ffffff",
           "accent-content": "#ffffff",
-          "base-100": "#3d4451", // Background
+          "base-100": "#31394d", // Background
           "base-content": "#ebecf0", //  text + icon colour
         },
       },

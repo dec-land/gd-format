@@ -80,24 +80,23 @@ export default function LintPage() {
   };
 
   return (
-    <div className="flex pt-20 h-full min-h-screen flex-col items-center px-4 sm:px-10">
+    <div className="flex pt-10 h-screen flex-col items-center px-4 sm:px-10">
       <div className="mt-4 flex items-center space-x-2">
         <button
-          className="w-[140px] btn btn-primary font-bold"
+          className="btn w-[150px] btn-primary font-bold btn-lg"
           onClick={() => handleLinting()}
-          // disabled={loading || !inputCode || hasLinted}
         >
           {loading ? <span className="loading loading-spinner"></span> : "Lint"}
         </button>
       </div>
 
-      <div className="mt-4 text-center text-xs">
+      <div className="mt-4 text-center text-s">
         {loading
           ? "Linting..."
           : 'Please enter some GDScript, then click "Lint"'}
       </div>
 
-      <div className="mt-4 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
+      <div className="mt-4 flex w-full lg:px-20 max-w-[1800px] flex-col justify-between sm:flex-row sm:space-x-10">
         <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
           <div className="text-center text-xl font-bold">Input</div>
 
