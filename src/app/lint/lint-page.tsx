@@ -1,25 +1,18 @@
 "use client";
 
-import { CodeBlock } from "@/components/CodeBlock";
+import { CodeBlock } from "@/src/components/CodeBlock";
 import { BackendError } from "@/types/BackendError";
 import axios, { isAxiosError } from "axios";
-import { Metadata } from "next";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 const MAX_CODE_LENGTH = 1000000;
 
-export const metadata: Metadata = {
-  title: "GDScript Linter",
-  description: "Lint your GDScript code.",
-};
-
-export default function Home() {
+export default function LintPage() {
   const [inputCode, setInputCode] = useState<string>("");
   const [output, setOutput] = useState<Response | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
-  const [hasLinted, setHasLinted] = useState<boolean>(false);
 
   type Response = {
     numberOfProblems: number;
@@ -84,7 +77,6 @@ export default function Home() {
 
     setOutput(response.data);
     setLoading(false);
-    setHasLinted(true);
   };
 
   return (
@@ -115,7 +107,6 @@ export default function Home() {
             editable={!loading}
             onChange={(value) => {
               setInputCode(value);
-              setHasLinted(false);
             }}
           />
         </div>

@@ -1,20 +1,14 @@
 "use client";
 
-import { CodeBlock } from "@/components/CodeBlock";
+import { CodeBlock } from "@/src/components/CodeBlock";
 import { BackendError } from "@/types/BackendError";
 import axios, { isAxiosError } from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "GDScript Formatter",
-  description: "Prettify your GDScript.",
-};
 
 const MAX_CODE_LENGTH = 1000000;
 
-export default function Home() {
+export default function FormatPage() {
   const [inputCode, setInputCode] = useState<string>("");
   const [outputCode, setOutputCode] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -87,7 +81,6 @@ export default function Home() {
         <button
           className="w-[140px] btn btn-primary font-bold"
           onClick={() => handleFormat()}
-          // disabled={loading || !inputCode || hasFormatted}
         >
           {loading ? (
             <span className="loading loading-spinner"></span>
