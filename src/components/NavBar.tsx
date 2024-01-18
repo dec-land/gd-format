@@ -18,6 +18,7 @@ export const Navbar: FC = () => {
         <nav className="ml-auto  space-x-4 pr-6">
           <Link href="/format">GDScript Beautifier</Link>
           <Link href="/lint">GDScript Linter</Link>
+          <Link href="/diff">Diff Checker</Link>
         </nav>
       </div>
       <LightDarkSwap />

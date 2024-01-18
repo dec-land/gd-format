@@ -1,7 +1,7 @@
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import CodeMirror, { Extension } from "@uiw/react-codemirror";
 import { gdscript } from "@gdquest/codemirror-gdscript";
-import { FC, useCallback, useEffect } from "react";
+import { FC } from "react";
 import {
   faSave,
   faFolderOpen,
