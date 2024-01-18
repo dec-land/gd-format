@@ -15,9 +15,13 @@ export const Navbar: FC = () => {
           <Link href="/">GDScript Formatter</Link>
         </h1>
 
-        <nav className="ml-auto  space-x-4 pr-6">
-          <Link href="/format">GDScript Beautifier</Link>
-          <Link href="/lint">GDScript Linter</Link>
+        <nav className="flex ml-auto space-x-4 pr-4">
+          <h1 className="text-sm">
+            <Link href="/format">GDScript Beautifier</Link>
+          </h1>
+          <h1 className="text-sm">
+            <Link href="/lint">GDScript Linter</Link>
+          </h1>
         </nav>
       </div>
       <LightDarkSwap />
