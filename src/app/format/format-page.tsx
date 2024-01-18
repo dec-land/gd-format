@@ -32,6 +32,7 @@ export default function FormatPage() {
 
     const controller = new AbortController();
 
+    // TODO - move to next js server commands
     const response = await axios
       .post(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/v1/format/gd-script`,
@@ -75,8 +76,9 @@ export default function FormatPage() {
     await navigator.clipboard.writeText(text);
   };
 
+  // Extract shared components
   return (
-    <div className="flex pt-10 h-screen flex-col items-center px-4 sm:px-10">
+    <div className="flex pt-10 h-100 flex-col items-center px-4 sm:px-10 pb-40 sm:pb-20">
       <div className="mt-4 flex items-center space-x-2">
         <button
           className="btn w-[150px] btn-primary font-bold btn-lg"
@@ -89,6 +91,7 @@ export default function FormatPage() {
           )}
         </button>
       </div>
+
       <div className="mt-4 text-center text-s">
         {loading
           ? "Formatting..."

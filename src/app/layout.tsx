@@ -56,7 +56,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={`${inter.className} flex h-screen h-[100svh] flex-col`}>
+      <body className={`${inter.className}`}>
         <ToastContainer autoClose={2000} />
         <Navbar />
         {children}
