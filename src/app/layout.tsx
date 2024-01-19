@@ -9,7 +9,6 @@ import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import Head from "next/head";
 import Script from "next/script";
 config.autoAddCss = false;
 
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
   robots: "index, follow",
 
   keywords:
-    "gdscript formatter, gdscriptformatter, gdscript linter, godot formatter",
+    "gdscript formatter, gdscriptformatter, gdscript linter, godot formatter, gdscript to c# converter",
   authors: { name: "Declan Fitzpatrick" },
 
   openGraph: {
