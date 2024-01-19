@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# GDScript Formatter Frontend
+
+Welcome to the GDScript Formatter Frontend! This user-friendly web application is designed for formatting, linting, and converting GDScript. The frontend is publicly accessible at [https://www.gdscriptformatter.com/](https://www.gdscriptformatter.com/), providing an intuitive interface powered by Next.js, React, and Tailwind CSS. The backend for this site can be found [here](https://github.com/dec-land/gd-format-backend).
 
 ## Getting Started
 
-First, run the development server:
+First, install pnpm if you haven't already:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install -g pnpm
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Secondly, install required modules:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Thirdly, run the development server:
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+The server should then be accessible at [http://localhost:3001](http://localhost:3001/health)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 1. GDScript Formatting Page
 
-## Deploy on Vercel
+Visit [https://www.gdscriptformatter.com/format](https://www.gdscriptformatter.com/format) to utilize the GDScript formatting feature.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. GDScript Linting Page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Access [https://www.gdscriptformatter.com/lint](https://www.gdscriptformatter.com/lint) to perform linting on your GDScript code.
+
+### 3. GDScript to C# / C# to GDScript Conversion Page
+
+Navigate to [https://www.gdscriptformatter.com/convert](https://www.gdscriptformatter.com/convert) to convert GDScript code to C# or C# to GDScript.
+
+## Deployment
+
+The GDScript Formatter Frontend is automatically deployed using Vercel. The deployment process is triggered automatically upon changes to main, ensuring that the latest features are always available on [https://www.gdscriptformatter.com/](https://www.gdscriptformatter.com/).
+
+### Deployment Details
+
+- **Hosting Platform:** [Vercel](https://vercel.com/)
+- **Automatic Deployment:** Yes
+- **Access the Frontend:** [https://www.gdscriptformatter.com/](https://www.gdscriptformatter.com/)
+
+Feel free to explore the GDScript Formatter Frontend. If you have any feedback, encounter issues, or have suggestions for improvements, please don't hesitate to reach out. Contributions are always welcome!
+
+Happy coding and formatting!
