@@ -5,10 +5,7 @@ export const Footer: FC = () => {
   return (
     <footer className="footer fixed inset-x-0 bottom-0 footer-center p-4 bg-base-200 text-base-content">
       <aside>
-        <p>
-          Copyright © {currentYear} - All right reserved | Created by Declan
-          Fitzpatrick
-        </p>
+        <p>What to put here? ʕ •ᴥ•ʔ | Created by Declan Fitzpatrick</p>
       </aside>
     </footer>
   );

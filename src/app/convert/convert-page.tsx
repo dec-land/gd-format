@@ -2,28 +2,37 @@
 
 import AboutSection from "@/src/components/AboutSection";
 import { CodeBlock } from "@/src/components/CodeBlock";
+import { ConversionSelect } from "@/src/components/ConversionSelect";
+import { VersionSelect } from "@/src/components/VersionSelect";
 import { BackendError } from "@/types/BackendError";
+import { Version, Conversion } from "@/types/Conversion";
+import { csharp } from "@replit/codemirror-lang-csharp";
+import { gdscript } from "@gdquest/codemirror-gdscript";
 import axios, { isAxiosError } from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const MAX_CODE_LENGTH = 1000000;
+const MAX_CODE_LENGTH = 10000;
 
-export default function FormatPage() {
+export default function ConvertPage() {
   const [inputCode, setInputCode] = useState<string>("");
   const [outputCode, setOutputCode] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [hasFormatted, setHasFormatted] = useState<boolean>(false);
+  const [hasConverted, setHasConverted] = useState<boolean>(false);
+  const [version, setVersion] = useState<Version>("4");
+  const [conversion, setConversion] = useState<Conversion>("gdscript-c#");
 
-  const handleFormat = async () => {
+  const handleConvert = async () => {
+    if (loading || hasConverted) return;
+    const language = conversion === "c#-gdscript" ? "C#" : "GDScript";
     if (!inputCode) {
-      toast.info("Please enter some GDScript to format.");
+      toast.info(`Please enter some ${language} to convert.`);
       return;
     }
 
     if (inputCode.length > MAX_CODE_LENGTH) {
       toast.error(
-        `Please enter GDScript less than ${MAX_CODE_LENGTH} characters. You are currently at ${inputCode.length} characters.`
+        `Please enter ${language} less than ${MAX_CODE_LENGTH} characters. You are currently at ${inputCode.length} characters.`
       );
       return;
     }
@@ -34,11 +43,19 @@ export default function FormatPage() {
     const controller = new AbortController();
 
     // TODO - move to next js server commands
+    const endpoint =
+      conversion === "c#-gdscript"
+        ? "convert/csharp-gdscript"
+        : "convert/gdscript-csharp";
+
     const response = await axios
       .post(
-        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/v1/format/gd-script`,
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/v1/${endpoint}`,
         inputCode,
         {
+          params: {
+            version,
+          },
           signal: controller.signal,
           headers: {
             Accept: "text/plain",
@@ -47,6 +64,7 @@ export default function FormatPage() {
         }
       )
       .catch((error) => {
+        console.log(error);
         setLoading(false);
         if (isAxiosError<BackendError>(error) && error.response) {
           if (error.response.status === 422) {
@@ -65,40 +83,46 @@ export default function FormatPage() {
       return;
     }
 
-    toast.success("Code successfully formatted! :)");
+    toast.success("Code successfully converted! :)");
 
     setOutputCode(response.data);
     setLoading(false);
-    setHasFormatted(true);
-    copyToClipboard(response.data);
-  };
-
-  const copyToClipboard = async (text: string) => {
-    await navigator.clipboard.writeText(text);
+    setHasConverted(true);
   };
 
   // Extract shared components
   return (
     <div className="flex pt-10 h-100 flex-col items-center px-4 sm:px-10 pb-40 sm:pb-20">
-      <div className="mt-4 flex items-center space-x-2">
+      <div className="mt-4 flex items-center space-x-6">
+        <VersionSelect
+          version={version}
+          disabled={loading}
+          onChange={(value) => setVersion(value)}
+        />
         <button
           className="btn w-[150px] btn-primary font-bold btn-lg"
-          onClick={() => handleFormat()}
+          onClick={() => handleConvert()}
         >
           {loading ? (
             <span className="loading loading-spinner"></span>
           ) : (
-            "Format"
+            "Convert"
           )}
         </button>
       </div>
 
+      <div className="mt-4 flex items-center">
+        <ConversionSelect
+          disabled={loading}
+          conversion={conversion}
+          onChange={(value) => setConversion(value)}
+        />
+      </div>
+
       <div className="mt-4 text-center text-s">
         {loading
-          ? "Formatting..."
-          : hasFormatted
-          ? "Output copied to clipboard!"
-          : 'Please enter some GDScript, then click "Format"'}
+          ? "Converting..."
+          : 'Please enter some GDScript, select the Godot version you are using, select which language you want to convert from/to, then click "Convert"'}
       </div>
 
       <div className="mt-4 flex w-full lg:px-20 max-w-[1800px] flex-col justify-between sm:flex-row sm:space-x-10">
@@ -106,12 +130,15 @@ export default function FormatPage() {
           <div className="text-center text-xl font-bold">Input</div>
 
           <CodeBlock
+            extensions={
+              conversion === "gdscript-c#" ? [gdscript()] : [csharp()]
+            }
             code={inputCode}
             isLoading={loading}
             editable={!loading}
             onChange={(value) => {
               setInputCode(value);
-              setHasFormatted(false);
+              setHasConverted(false);
             }}
           />
         </div>
@@ -120,6 +147,9 @@ export default function FormatPage() {
           <div className="text-center text-xl font-bold">Output</div>
           <CodeBlock
             code={outputCode}
+            extensions={
+              conversion === "gdscript-c#" ? [csharp()] : [gdscript()]
+            }
             editable={false}
             isLoading={loading}
             showClearAndOpenFromFile={false}

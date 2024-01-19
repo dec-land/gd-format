@@ -1,5 +1,6 @@
 "use client";
 
+import AboutSection from "@/src/components/AboutSection";
 import { CodeBlock } from "@/src/components/CodeBlock";
 import { BackendError } from "@/types/BackendError";
 import axios, { isAxiosError } from "axios";
@@ -138,6 +139,8 @@ export default function LintPage() {
           />
         </div>
       </div>
+
+      <AboutSection />
     </div>
   );
 }
