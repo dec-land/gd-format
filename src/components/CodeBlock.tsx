@@ -58,6 +58,7 @@ export const CodeBlock: FC<Props> = ({
   const handleCopy = async () => {
     if (!code.length) {
       toast.error("Nothing to copy");
+      return;
     }
     await navigator.clipboard.writeText(code);
     toast.success("Code successfully copied to clipboard");

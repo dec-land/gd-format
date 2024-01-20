@@ -1,12 +1,43 @@
+"use client";
+
 import React, { FC } from "react";
+import { useTheme } from "../context/theme";
+import githubDark from "../assets/github-dark.svg";
+import githubWhite from "../assets/github-white.svg";
+import Image from "next/image";
 
 export const Footer: FC = () => {
-  const currentYear = new Date().getFullYear();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
     <footer className="footer fixed inset-x-0 bottom-0 footer-center p-4 bg-base-200 text-base-content">
-      <aside>
-        <p>What to put here? ʕ •ᴥ•ʔ | Created by Declan Fitzpatrick</p>
-      </aside>
+      <div className="flex w-full items-center justify-between">
+        <aside className="text-center" style={{ flexBasis: "100%" }}>
+          <p>What to put here? ʕ •ᴥ•ʔ | Created by Declan Fitzpatrick</p>
+        </aside>
+        <nav>
+          <a href="https://github.com/dec-land/gd-format" className="ml-auto">
+            {isDark ? (
+              <Image
+                priority
+                src={githubWhite}
+                height={25}
+                width={25}
+                alt="Github button"
+              />
+            ) : (
+              <Image
+                priority
+                height={25}
+                width={25}
+                src={githubDark}
+                alt="Github button"
+              />
+            )}
+          </a>
+        </nav>
+      </div>
     </footer>
   );
 };

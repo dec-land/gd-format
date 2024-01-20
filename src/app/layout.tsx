@@ -10,6 +10,7 @@ import { Inter } from "next/font/google";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Script from "next/script";
+import { ThemeProvider } from "../context/theme";
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
@@ -57,9 +58,11 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className}`}>
         <ToastContainer autoClose={2000} />
-        <Navbar />
-        {children}
-        <Footer />
+        <ThemeProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
         <SpeedInsights />
         <Analytics />
       </body>

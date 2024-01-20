@@ -14,6 +14,7 @@ export default function LintPage() {
   const [inputCode, setInputCode] = useState<string>("");
   const [output, setOutput] = useState<Response | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
+  const [hasLinted, setHasLinted] = useState<boolean>(false);
 
   type Response = {
     numberOfProblems: number;
@@ -22,6 +23,8 @@ export default function LintPage() {
   };
 
   const handleLinting = async () => {
+    if (loading || hasLinted) return;
+
     if (!inputCode) {
       toast.info("Please enter some GDScript to lint.");
       return;
@@ -78,6 +81,7 @@ export default function LintPage() {
     }
 
     setOutput(response.data);
+    setHasLinted(true);
     setLoading(false);
   };
 
@@ -109,6 +113,7 @@ export default function LintPage() {
             editable={!loading}
             onChange={(value) => {
               setInputCode(value);
+              setHasLinted(false);
             }}
           />
         </div>

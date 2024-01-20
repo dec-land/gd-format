@@ -16,6 +16,8 @@ export default function FormatPage() {
   const [hasFormatted, setHasFormatted] = useState<boolean>(false);
 
   const handleFormat = async () => {
+    if (loading || hasFormatted) return;
+
     if (!inputCode) {
       toast.info("Please enter some GDScript to format.");
       return;
