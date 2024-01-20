@@ -65,6 +65,26 @@ export default async function Page() {
             and no data is stored on our servers.
           </p>
 
+          <h2 className="text-2xl font-bold mt-8 mb-4">
+            Open Source Libraries
+          </h2>
+
+          <p>
+            GDScript Formatter utilizes open-source libraries to provide its
+            functionalities. If you are the owner of any library used in
+            GDScript Formatter and believe that it does not comply with standard
+            practices or violates copyright rules, please{" "}
+            <Link
+              href="mailto:declanfitzpatrick95@gmail.com"
+              style={{ color: "skyblue" }}
+              className="font-bold"
+            >
+              contact us
+            </Link>{" "}
+            immediately. We are committed to following standards and respecting
+            copyrights, and we will take prompt action to address any concerns.
+          </p>
+
           <h2 className="text-2xl font-bold mt-8 mb-4">Advertising</h2>
           <p>
             Please refer to{" "}

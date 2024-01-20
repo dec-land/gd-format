@@ -5,7 +5,7 @@ import { useTheme } from "../context/theme";
 import githubDark from "../assets/github-dark.svg";
 import githubWhite from "../assets/github-white.svg";
 import Image from "next/image";
-import { faSun, faMoon, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
