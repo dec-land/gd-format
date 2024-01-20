@@ -15,7 +15,7 @@ export const Navbar: FC = () => {
           <Link href="/">GDScript Formatter</Link>
         </h1>
 
-        <nav className="flex ml-auto space-x-4 pr-4">
+        <nav className="flex ml-auto space-x-4 items-center pr-4">
           <h1 className="text-sm">
             <Link href="/format">GDScript Beautifier</Link>
           </h1>
