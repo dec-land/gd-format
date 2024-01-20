@@ -145,7 +145,9 @@ export default function LintPage() {
         </div>
       </div>
 
-      <AboutSection />
+      <div className="mt-10">
+        <AboutSection />
+      </div>
     </div>
   );
 }

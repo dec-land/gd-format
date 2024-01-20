@@ -7,6 +7,7 @@ import githubWhite from "../assets/github-white.svg";
 import Image from "next/image";
 import { faSun, faMoon, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
 export const Footer: FC = () => {
   const { theme } = useTheme();
@@ -16,10 +17,22 @@ export const Footer: FC = () => {
     <footer className="footer fixed inset-x-0 bottom-0 footer-center p-4 bg-base-200 text-base-content">
       <div className="flex w-full items-center justify-between">
         <aside className="text-center" style={{ flexBasis: "100%" }}>
-          <p>ʕ •ᴥ•ʔ | Created by Declan Fitzpatrick</p>
+          <p>
+            GDScript Formatter | Created by Declan Fitzpatrick |{" "}
+            <Link
+              href="/policy"
+              style={{ color: "skyblue" }}
+              className="font-bold"
+            >
+              Privacy Policy
+            </Link>
+          </p>
         </aside>
         <nav className="flex flex-row space-x-2">
-          <a href="https://github.com/dec-land/gd-format" className="ml-auto">
+          <Link
+            href="https://github.com/dec-land/gd-format"
+            className="ml-auto"
+          >
             {isDark ? (
               <Image
                 priority
@@ -37,10 +50,10 @@ export const Footer: FC = () => {
                 alt="Github button"
               />
             )}
-          </a>
-          <a href="mailto:declanfitzpatrick95@gmail.com" className="ml-auto">
+          </Link>
+          <Link href="mailto:declanfitzpatrick95@gmail.com" className="ml-auto">
             <FontAwesomeIcon icon={faEnvelope} size="xl" />
-          </a>
+          </Link>
         </nav>
       </div>
     </footer>

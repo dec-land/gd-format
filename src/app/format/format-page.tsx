@@ -129,7 +129,9 @@ export default function FormatPage() {
         </div>
       </div>
 
-      <AboutSection />
+      <div className="mt-10">
+        <AboutSection />
+      </div>
     </div>
   );
 }

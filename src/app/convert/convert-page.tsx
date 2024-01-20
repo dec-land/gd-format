@@ -157,7 +157,9 @@ export default function ConvertPage() {
         </div>
       </div>
 
-      <AboutSection />
+      <div className="mt-10">
+        <AboutSection />
+      </div>
     </div>
   );
 }

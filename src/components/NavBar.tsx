@@ -25,6 +25,9 @@ export const Navbar: FC = () => {
           <h1 className="text-sm">
             <Link href="/convert">GDScript/C# Converter</Link>
           </h1>
+          <h1 className="text-sm">
+            <Link href="/about">About</Link>
+          </h1>
         </nav>
       </div>
       <LightDarkSwap />
