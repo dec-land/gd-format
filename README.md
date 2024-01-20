@@ -8,6 +8,7 @@ Welcome to the GDScript Formatter Frontend! This user-friendly web application i
 
 - [ ] Add a continue button to the converter, for if code has been cut off (incomplete) for larger inputs.
 - [ ] Add test coverage.
+- [ ] Add rate limit for conversions.
 - [ ] Improve error handling for Chat GPT errors (rate limit etc).
 - [ ] Add persistence to output if user navigates to another page
 - [ ] Add proper eslint + prettier configs
