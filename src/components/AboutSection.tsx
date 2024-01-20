@@ -1,4 +1,6 @@
-import { Extension } from "@codemirror/state";
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 
@@ -69,6 +71,17 @@ const AboutSection: FC<Props> = ({ page }) => {
         Please note that while the conversion tool is mostly accurate, it&apos;s
         advisable to review and test the results for your specific use case.
       </p>
+
+      <div className="flex justify-center mt-8">
+        <Link href="https://www.buymeacoffee.com/lemoncrap">
+          <Image
+            alt="Donate button"
+            width={250}
+            height={50}
+            src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=lemoncrap&button_colour=478cbf&font_colour=ffffff&font_family=Poppins&outline_colour=ffffff&coffee_colour=FFDD00"
+          />
+        </Link>
+      </div>
     </div>
   );
 };

@@ -9,7 +9,7 @@ export const Navbar: FC = () => {
     <div className="navbar shadow-lg px-4 sm:px-8">
       <div className="flex-1 flex items-center">
         <Link href="/">
-          <Image alt="icon" src="icon.svg" width={50} height={50} />
+          <Image alt="icon" src="/icon.svg" width={50} height={50} />
         </Link>
         <h1 className="text-lg font-bold mx-4">
           <Link href="/">GDScript Formatter</Link>
