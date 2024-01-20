@@ -76,7 +76,7 @@ const AboutSection: FC<Props> = ({ page }) => {
         <Link href="https://www.buymeacoffee.com/lemoncrap">
           <Image
             alt="Donate button"
-            width={250}
+            width={225}
             height={50}
             src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=lemoncrap&button_colour=478cbf&font_colour=ffffff&font_family=Poppins&outline_colour=ffffff&coffee_colour=FFDD00"
           />
