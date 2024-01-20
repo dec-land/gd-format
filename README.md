@@ -2,6 +2,18 @@
 
 Welcome to the GDScript Formatter Frontend! This user-friendly web application is designed for formatting, linting, and converting GDScript. The frontend is publicly accessible at [https://www.gdscriptformatter.com/](https://www.gdscriptformatter.com/), providing an intuitive interface powered by Next.js, React, and Tailwind CSS. The backend for this site can be found [here](https://github.com/dec-land/gd-format-backend).
 
+---
+
+## TODO
+
+- [ ] Add test coverage.
+- [ ] Improve error handling for Chat GPT errors (rate limit etc).
+- [ ] Add proper eslint + prettier configs
+- [ ] Add husky pre commit hooks for build, eslint + prettier, and tests when implemented
+- [ ] Improve error handling for Chat GPT errors (rate limit etc).
+
+---
+
 ## Getting Started
 
 First, install pnpm if you haven't already:
