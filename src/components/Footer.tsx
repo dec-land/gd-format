@@ -16,7 +16,7 @@ export const Footer: FC = () => {
     <footer className="footer fixed inset-x-0 bottom-0 footer-center p-4 bg-base-200 text-base-content">
       <div className="flex w-full items-center justify-between">
         <aside className="text-center" style={{ flexBasis: "100%" }}>
-          <p>What to put here? ʕ •ᴥ•ʔ | Created by Declan Fitzpatrick</p>
+          <p>ʕ •ᴥ•ʔ | Created by Declan Fitzpatrick</p>
         </aside>
         <nav className="flex flex-row space-x-2">
           <a href="https://github.com/dec-land/gd-format" className="ml-auto">
