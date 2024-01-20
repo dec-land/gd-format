@@ -17,25 +17,31 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gdscriptformatter.com"),
-  title: "GDScript Formatter",
-  description: "Prettify your GDScript code and more",
+  title:
+    "GDScript Formatter - GDScript Formatting, Linting, and Conversion Tools",
+  description:
+    "Prettify and optimize your GDScript code with our formatting, linting, and conversion tools. Effortlessly convert between GDScript and C#.",
   icons: "/favicon.ico",
   robots: "index, follow",
 
   keywords:
-    "gdscript formatter, gdscriptformatter, gdscript linter, godot formatter, gdscript to c# converter",
+    "gdscript formatter, gdscriptformatter, gdscript linter, godot formatter, gdscript to c# converter, code optimization, game development, GDScript tools",
   authors: { name: "Declan Fitzpatrick" },
 
   openGraph: {
     siteName: "GDScript Formatter",
-    title: "GDScript Formatter",
-    description: "Prettify your GDScript code and more",
+    title:
+      "GDScript Formatter - GDScript Formatting, Linting, and Conversion Tools",
+    description:
+      "Prettify and optimize your GDScript code with our formatting, linting, and conversion tools. Effortlessly convert between GDScript and C#.",
     type: "website",
     url: "https://gdscriptformatter.com",
   },
   twitter: {
-    title: "GDScript Formatter",
-    description: "Prettify your GDScript code and more",
+    title:
+      "GDScript Formatter - GDScript Formatting, Linting, and Conversion Tools",
+    description:
+      "Prettify and optimize your GDScript code with our formatting, linting, and conversion tools. Effortlessly convert between GDScript and C#.",
   },
 };
 

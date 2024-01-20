@@ -5,6 +5,8 @@ import { useTheme } from "../context/theme";
 import githubDark from "../assets/github-dark.svg";
 import githubWhite from "../assets/github-white.svg";
 import Image from "next/image";
+import { faSun, faMoon, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Footer: FC = () => {
   const { theme } = useTheme();
@@ -16,7 +18,7 @@ export const Footer: FC = () => {
         <aside className="text-center" style={{ flexBasis: "100%" }}>
           <p>What to put here? ʕ •ᴥ•ʔ | Created by Declan Fitzpatrick</p>
         </aside>
-        <nav>
+        <nav className="flex flex-row space-x-2">
           <a href="https://github.com/dec-land/gd-format" className="ml-auto">
             {isDark ? (
               <Image
@@ -35,6 +37,9 @@ export const Footer: FC = () => {
                 alt="Github button"
               />
             )}
+          </a>
+          <a href="mailto:declanfitzpatrick95@gmail.com" className="ml-auto">
+            <FontAwesomeIcon icon={faEnvelope} size="xl" />
           </a>
         </nav>
       </div>
