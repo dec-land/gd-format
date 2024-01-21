@@ -19,17 +19,17 @@ export const Navbar: FC = () => {
         </div>
       </div>
 
-      <nav className="flex flex-col sm:flex-row sm:ml-auto space-y-2 sm:space-y-0 sm:space-x-4 items-center sm:pr-4 text-left sm:text-center">
-        <h1 className="text-sm">
+      <nav className="flex flex-col sm:flex-row sm:ml-auto space-y-2 sm:space-y-0 sm:space-x-4 items-center sm:pr-4 text-center sm:text-left">
+        <h1 className="text-sm text-center sm:text-left">
           <Link href="/format">GDScript Beautifier</Link>
         </h1>
-        <h1 className="text-sm">
+        <h1 className="text-sm text-center sm:text-left">
           <Link href="/lint">GDScript Linter</Link>
         </h1>
-        <h1 className="text-sm">
+        <h1 className="text-sm text-center sm:text-left">
           <Link href="/convert">GDScript/C# Converter</Link>
         </h1>
-        <h1 className="text-sm">
+        <h1 className="text-sm text-center sm:text-left">
           <Link href="/about">About</Link>
         </h1>
       </nav>
