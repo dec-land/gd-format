@@ -51,7 +51,6 @@ export default function LintPage() {
 
     const controller = new AbortController();
 
-    // TODO - move to nextjs server commands
     const response = await axios
       .post(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/v1/lint/gd-script`,
@@ -94,7 +93,6 @@ export default function LintPage() {
     setLoading(false);
   };
 
-  // TODO - extract shared lint/format stuff to components
   return (
     <div className="flex pt-10 h-100 flex-col items-center px-4 sm:px-10 pb-40 sm:pb-20">
       <div className="mt-4 flex items-center space-x-2">
@@ -115,7 +113,7 @@ export default function LintPage() {
         inputCode={inputCode}
         outputCode={output?.problems.join("\n") ?? ""}
         loading={loading}
-        errors={output}
+        errors={output?.hasIssues ? output : undefined}
         showOutputClearAndOpenFromFile={false}
         showOutputDownloadAndClear={false}
         onInputChange={(value) => {

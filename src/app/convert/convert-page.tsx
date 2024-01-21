@@ -59,7 +59,6 @@ export default function ConvertPage() {
 
     const controller = new AbortController();
 
-    // TODO - move to next js server commands
     const endpoint =
       conversion === "c#-gdscript"
         ? "convert/csharp-gdscript"
@@ -108,7 +107,7 @@ export default function ConvertPage() {
 
     toast.success("Code successfully converted! :)");
 
-    // setOutputCode(response.data);
+    setOutputCode(response.data);
     setLoading(false);
     setHasConverted(true);
   };

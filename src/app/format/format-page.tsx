@@ -44,7 +44,6 @@ export default function FormatPage() {
 
     const controller = new AbortController();
 
-    // TODO - move to next js server commands
     const response = await axios
       .post(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/v1/format/gd-script`,
