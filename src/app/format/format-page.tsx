@@ -28,13 +28,13 @@ export default function FormatPage() {
     if (loading) return;
 
     if (!inputCode) {
-      toast.info("Please enter some GDScript to format.");
+      toast.info("Please enter some Godot 4 GDScript to format.");
       return;
     }
 
     if (inputCode.length > MAX_CODE_LENGTH) {
       toast.error(
-        `Please enter GDScript less than ${MAX_CODE_LENGTH} characters. You are currently at ${inputCode.length} characters.`
+        `Please enter Godot 4 GDScript less than ${MAX_CODE_LENGTH} characters. You are currently at ${inputCode.length} characters.`
       );
       return;
     }
@@ -61,7 +61,7 @@ export default function FormatPage() {
         if (isAxiosError<BackendError>(error) && error.response) {
           if (error.response.status === 422) {
             toast.error(
-              "Invalid GDScript provided, please change it and try again."
+              "Invalid GDScript provided, please change it and try again. Note - This currently only works for Godot 4 GDScript"
             );
             return;
           }
@@ -103,7 +103,7 @@ export default function FormatPage() {
           ? "Formatting..."
           : hasFormatted
           ? "Output copied to clipboard!"
-          : 'Please enter some GDScript, then click "Format"'}
+          : 'Please enter some Godot 4 GDScript, then click "Format"'}
       </div>
 
       <CodeBlocks

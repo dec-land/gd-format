@@ -35,7 +35,7 @@ export default function LintPage() {
     if (loading) return;
 
     if (!inputCode) {
-      toast.info("Please enter some GDScript to lint.");
+      toast.info("Please enter some Godot 4 GDScript to lint.");
       return;
     }
 
@@ -68,7 +68,7 @@ export default function LintPage() {
         if (isAxiosError<BackendError>(error) && error.response) {
           if (error.response.status === 422) {
             toast.error(
-              "Invalid GDScript provided, please change it and try again."
+              "Invalid GDScript provided, please change it and try again. Note - This currently only works for Godot 4 GDScript"
             );
             return;
           }
@@ -106,7 +106,7 @@ export default function LintPage() {
       <div className="mt-4 text-center text-s">
         {loading
           ? "Linting..."
-          : 'Please enter some GDScript, then click "Lint"'}
+          : 'Please enter some Godot 4 GDScript, then click "Lint"'}
       </div>
 
       <CodeBlocks

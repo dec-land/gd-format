@@ -20,7 +20,9 @@ const AboutSection: FC<Props> = ({ page }) => {
       <p className={`text-base`}>
         Welcome to GDScript Formatter, your go-to tool for formatting and
         linting GDScript, a language commonly used in Godot game development.
-        This website utilizes the capabilities of{" "}
+        Currently it is only possible to format and lint Godot 4 GDScript, but I
+        do plan to add support for 3 shortly. This website utilizes the
+        capabilities of{" "}
         <Link
           href="https://github.com/Scony/godot-gdscript-toolkit"
           target="_blank"

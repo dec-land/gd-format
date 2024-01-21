@@ -25,6 +25,7 @@ Welcome to the GDScript Formatter Frontend! This user-friendly web application i
 - [ ] Sort ad placement when accepted by adsense :cry:
 - [ ] Move axios calls into server api components
 - [ ] Add ability to specify line length for formatting
+= [ ] Add support for Godot 3 GDScript
 
 ---
 
