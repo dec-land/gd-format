@@ -62,7 +62,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={`${inter.className}`}>
+      <body className={` ${inter.className}`}>
         <ToastContainer autoClose={2000} />
         <ThemeProvider>
           <Navbar />
