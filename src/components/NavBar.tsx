@@ -8,7 +8,7 @@ export const Navbar: FC = () => {
   return (
     <div className="navbar flex flex-col sm:flex-row shadow-lg px-4 sm:px-8">
       <div className="flex items-center">
-        <Link href="/">
+        <Link className="min-w-[40px]" href="/">
           <Image alt="icon" src="/icon.svg" width={50} height={50} />
         </Link>
         <h1 className="text-lg font-bold mx-4">
@@ -19,17 +19,17 @@ export const Navbar: FC = () => {
         </div>
       </div>
 
-      <nav className="flex flex-col sm:flex-row sm:ml-auto space-y-2 sm:space-y-0 sm:space-x-4 items-center sm:pr-4">
-        <h1 className="text-sm text-center">
+      <nav className="flex flex-col sm:flex-row sm:ml-auto space-y-2 sm:space-y-0 sm:space-x-4 items-center sm:pr-4 text-center">
+        <h1 className="text-sm sm:text-center">
           <Link href="/format">GDScript Beautifier</Link>
         </h1>
-        <h1 className="text-sm ext-center">
+        <h1 className="text-sm sm:text-center">
           <Link href="/lint">GDScript Linter</Link>
         </h1>
-        <h1 className="text-sm ext-center">
+        <h1 className="text-sm sm:text-center">
           <Link href="/convert">GDScript/C# Converter</Link>
         </h1>
-        <h1 className="text-sm ext-center">
+        <h1 className="text-sm sm:text-center">
           <Link href="/about">About</Link>
         </h1>
       </nav>

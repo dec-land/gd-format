@@ -30,8 +30,8 @@ export const Footer: FC = () => {
         </aside>
         <nav className="flex flex-row space-x-2">
           <Link
+            className="min-w-[20px]"
             href="https://github.com/dec-land/gd-format"
-            className="ml-auto"
           >
             {isDark ? (
               <Image

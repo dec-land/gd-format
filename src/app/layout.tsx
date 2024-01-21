@@ -53,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <head>
         <Script
           strategy="lazyOnload"
@@ -62,7 +62,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={` ${inter.className}`}>
+      <body className={`${inter.className} overflow-x-hidden`}>
         <ToastContainer autoClose={2000} />
         <ThemeProvider>
           <Navbar />
