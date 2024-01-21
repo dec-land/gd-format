@@ -16,7 +16,14 @@ export default function FormatPage() {
   const [hasFormatted, setHasFormatted] = useState<boolean>(false);
 
   const handleFormat = async () => {
-    if (loading || hasFormatted) return;
+    if (hasFormatted) {
+      toast.info(
+        "This code has already been formatted, please make a change before trying again."
+      );
+      return;
+    }
+
+    if (loading) return;
 
     if (!inputCode) {
       toast.info("Please enter some GDScript to format.");

@@ -21,9 +21,24 @@ export default function ConvertPage() {
   const [hasConverted, setHasConverted] = useState<boolean>(false);
   const [version, setVersion] = useState<Version>("4");
   const [conversion, setConversion] = useState<Conversion>("gdscript-c#");
+  const [rateLimitTimer, setRateLimitTimer] = useState<
+    ReturnType<typeof setTimeout> | undefined
+  >(undefined);
 
   const handleConvert = async () => {
-    if (loading || hasConverted) return;
+    if (hasConverted) {
+      toast.info(
+        "This code has already been converted, please make a change before trying again."
+      );
+      return;
+    }
+
+    if (rateLimitTimer) {
+      toast.info("Please wait 2 seconds before you can convert again");
+      return;
+    }
+
+    if (loading || rateLimitTimer) return;
     const language = conversion === "c#-gdscript" ? "C#" : "GDScript";
     if (!inputCode) {
       toast.info(`Please enter some ${language} to convert.`);
@@ -83,12 +98,22 @@ export default function ConvertPage() {
       return;
     }
 
+    setRateLimitTimer(
+      setTimeout(() => {
+        setRateLimitTimer(undefined);
+      }, 2000)
+    );
+
     toast.success("Code successfully converted! :)");
 
-    setOutputCode(response.data);
+    // setOutputCode(response.data);
     setLoading(false);
     setHasConverted(true);
   };
+
+  const helpText = loading
+    ? "Converting..."
+    : 'Please enter some GDScript, select the Godot version you are using, select which language you want to convert from/to, then click "Convert"';
 
   // Extract shared components
   return (
@@ -119,11 +144,7 @@ export default function ConvertPage() {
         />
       </div>
 
-      <div className="mt-4 text-center text-s">
-        {loading
-          ? "Converting..."
-          : 'Please enter some GDScript, select the Godot version you are using, select which language you want to convert from/to, then click "Convert"'}
-      </div>
+      <div className="mt-4 text-center text-s">{helpText}</div>
 
       <div className="mt-4 flex w-full lg:px-20 max-w-[1800px] flex-col justify-between sm:flex-row sm:space-x-10">
         <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">

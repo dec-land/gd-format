@@ -23,7 +23,14 @@ export default function LintPage() {
   };
 
   const handleLinting = async () => {
-    if (loading || hasLinted) return;
+    if (hasLinted) {
+      toast.info(
+        "This code has already been linted, please make a change before trying again."
+      );
+      return;
+    }
+
+    if (loading) return;
 
     if (!inputCode) {
       toast.info("Please enter some GDScript to lint.");
