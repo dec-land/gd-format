@@ -6,10 +6,13 @@ Welcome to the GDScript Formatter Frontend! This user-friendly web application i
 
 ## TODO
 
+- [x] Refactor pages into smaller reusable components
 - [x] Add an About page
+- [x] Add a privacy policy
+- [x] Add a buy me a coffee donate button
+- [x] Refactor pages into smaller reusable components
 - [ ] Add changelog to about section? 
 - [ ] Add Contact Form
-- [x] Add a privacy policy
 - [ ] Add a continue button to the converter, for if code has been cut off (incomplete) for larger inputs.
 - [ ] Add test coverage.
 - [ ] Add rate limit for conversions.
@@ -18,9 +21,9 @@ Welcome to the GDScript Formatter Frontend! This user-friendly web application i
 - [ ] Add proper eslint + prettier configs
 - [ ] Add husky pre commit hooks for build, eslint + prettier, and tests when implemented
 - [ ] Improve error handling for Chat GPT errors (rate limit etc).
-- [x] Add a buy me a coffee donate button
 - [ ] Add a paypal donate button (instead)
 - [ ] Sort ad placement when accepted by adsense :cry:
+- [ ] Move axios calls into server api components
 
 ---
 

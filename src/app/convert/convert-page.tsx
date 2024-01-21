@@ -11,6 +11,8 @@ import { gdscript } from "@gdquest/codemirror-gdscript";
 import axios, { isAxiosError } from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import CodeBlocks from "@/src/components/CodeBlocks";
+import ActionButton from "@/src/components/ActionButton";
 
 const MAX_CODE_LENGTH = 10000;
 
@@ -115,6 +117,8 @@ export default function ConvertPage() {
     ? "Converting..."
     : 'Please enter some GDScript, select the Godot version you are using, select which language you want to convert from/to, then click "Convert"';
 
+  const extensions = conversion === "gdscript-c#" ? [gdscript()] : [csharp()];
+
   // Extract shared components
   return (
     <div className="flex pt-10 h-100 flex-col items-center px-4 sm:px-10 pb-40 sm:pb-20">
@@ -124,16 +128,12 @@ export default function ConvertPage() {
           disabled={loading}
           onChange={(value) => setVersion(value)}
         />
-        <button
-          className="btn w-[150px] btn-primary font-bold btn-lg"
+
+        <ActionButton
           onClick={() => handleConvert()}
-        >
-          {loading ? (
-            <span className="loading loading-spinner"></span>
-          ) : (
-            "Convert"
-          )}
-        </button>
+          loading={loading}
+          text="Convert"
+        />
       </div>
 
       <div className="mt-4 flex items-center">
@@ -146,37 +146,17 @@ export default function ConvertPage() {
 
       <div className="mt-4 text-center text-s">{helpText}</div>
 
-      <div className="mt-4 flex w-full lg:px-20 max-w-[1800px] flex-col justify-between sm:flex-row sm:space-x-10">
-        <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
-          <div className="text-center text-xl font-bold">Input</div>
-
-          <CodeBlock
-            extensions={
-              conversion === "gdscript-c#" ? [gdscript()] : [csharp()]
-            }
-            code={inputCode}
-            isLoading={loading}
-            editable={!loading}
-            onChange={(value) => {
-              setInputCode(value);
-              setHasConverted(false);
-            }}
-          />
-        </div>
-
-        <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
-          <div className="text-center text-xl font-bold">Output</div>
-          <CodeBlock
-            code={outputCode}
-            extensions={
-              conversion === "gdscript-c#" ? [csharp()] : [gdscript()]
-            }
-            editable={false}
-            isLoading={loading}
-            showClearAndOpenFromFile={false}
-          />
-        </div>
-      </div>
+      <CodeBlocks
+        inputCode={inputCode}
+        outputCode={outputCode}
+        loading={loading}
+        inputExtensions={extensions}
+        outputExtensions={extensions}
+        onInputChange={(value) => {
+          setInputCode(value);
+          setHasConverted(false);
+        }}
+      />
 
       <div className="mt-10">
         <AboutSection />

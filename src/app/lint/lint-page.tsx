@@ -1,7 +1,9 @@
 "use client";
 
 import AboutSection from "@/src/components/AboutSection";
+import ActionButton from "@/src/components/ActionButton";
 import { CodeBlock } from "@/src/components/CodeBlock";
+import CodeBlocks from "@/src/components/CodeBlocks";
 import { BackendError } from "@/types/BackendError";
 import axios, { isAxiosError } from "axios";
 import Image from "next/image";
@@ -96,12 +98,11 @@ export default function LintPage() {
   return (
     <div className="flex pt-10 h-100 flex-col items-center px-4 sm:px-10 pb-40 sm:pb-20">
       <div className="mt-4 flex items-center space-x-2">
-        <button
-          className="btn w-[150px] btn-primary font-bold btn-lg"
+        <ActionButton
           onClick={() => handleLinting()}
-        >
-          {loading ? <span className="loading loading-spinner"></span> : "Lint"}
-        </button>
+          loading={loading}
+          text="Lint"
+        />
       </div>
 
       <div className="mt-4 text-center text-s">
@@ -110,47 +111,18 @@ export default function LintPage() {
           : 'Please enter some GDScript, then click "Lint"'}
       </div>
 
-      <div className="mt-4 flex w-full lg:px-20 max-w-[1800px] flex-col justify-between sm:flex-row sm:space-x-10">
-        <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
-          <div className="text-center text-xl font-bold">Input</div>
-
-          <CodeBlock
-            code={inputCode}
-            isLoading={loading}
-            editable={!loading}
-            onChange={(value) => {
-              setInputCode(value);
-              setHasLinted(false);
-            }}
-          />
-        </div>
-        <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
-          <div className="flex flex-row h-full w-full justify-center gap-4">
-            <div className="text-center text-xl font-bold">Output</div>
-            {output?.hasIssues && (
-              <div className="flex items-center justify-center gap-2">
-                <Image
-                  src="/warning.png" // Replace with your icon path
-                  alt="Warning"
-                  width={25}
-                  height={25}
-                />
-                <span className="text-sm font-medium text-red-500">
-                  {output.numberOfProblems} problems
-                </span>
-              </div>
-            )}
-          </div>
-          <CodeBlock
-            editable={false}
-            showDownloadAndClear={false}
-            isLoading={loading}
-            showClearAndOpenFromFile={false}
-            code={output?.problems.join("\n") ?? ""}
-            extensions={[]}
-          />
-        </div>
-      </div>
+      <CodeBlocks
+        inputCode={inputCode}
+        outputCode={output?.problems.join("\n") ?? ""}
+        loading={loading}
+        errors={output}
+        showOutputClearAndOpenFromFile={false}
+        showOutputDownloadAndClear={false}
+        onInputChange={(value) => {
+          setInputCode(value);
+          setHasLinted(false);
+        }}
+      />
 
       <div className="mt-10">
         <AboutSection />
