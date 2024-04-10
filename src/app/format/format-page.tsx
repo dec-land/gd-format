@@ -70,16 +70,22 @@ export default function FormatPage() {
         return;
       });
 
+    setLoading(false);
+
     if (!response?.data) {
-      setLoading(false);
+      return;
+    }
+
+    setHasFormatted(true);
+
+    if (response.data === inputCode) {
+      toast.info("Code is already formatted correctly! No changes made.");
       return;
     }
 
     toast.success("Code successfully formatted! :)");
 
     setOutputCode(response.data);
-    setLoading(false);
-    setHasFormatted(true);
     copyToClipboard(response.data);
   };
 
